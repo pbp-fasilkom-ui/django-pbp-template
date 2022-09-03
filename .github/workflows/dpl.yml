@@ -2,6 +2,20 @@ name: Deploy
 
 on:
   push:
+    # Reminder: Make sure the `branches` list only contain the name of main
+    # branch! Usually, the main branch name is either `master` or `main`.
+    # Check the list of branches of your repository via GitHub Web interface or
+    # use `git branch -av` command in your shell.
+
+    # This event trigger will only run the workflow whenever there are new
+    # commits pushed to the main branch. Therefore, the deployed app that
+    # will be accessed by users will be based on the latest version of the
+    # main branch.
+    branches:
+      - main
+    # We ignore any commits pushed to a branch named `template`. Hence,
+    # the deployment job will not run whenever there are any commits
+    # pushed to `template` branch.
     branches-ignore:
       - template
   pull_request:
@@ -29,5 +43,8 @@ jobs:
       with:
         initial_status: success
         token: ${{ github.token }}
+        # Assuming you are not using custom domain on Heroku, the target_url
+        # will contain the URL to your application hosted under Heroku's
+        # subdomain.
         target_url: https://${{ secrets.HEROKU_APP_NAME }}.herokuapp.com
         environment: production
