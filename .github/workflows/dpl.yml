@@ -13,9 +13,6 @@ on:
     # main branch.
     branches:
       - main
-  pull_request:
-    branches-ignore:
-      - template
 
 jobs:
   Deployment:
