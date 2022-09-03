@@ -13,11 +13,6 @@ on:
     # main branch.
     branches:
       - main
-    # We ignore any commits pushed to a branch named `template`. Hence,
-    # the deployment job will not run whenever there are any commits
-    # pushed to `template` branch.
-    branches-ignore:
-      - template
   pull_request:
     branches-ignore:
       - template
