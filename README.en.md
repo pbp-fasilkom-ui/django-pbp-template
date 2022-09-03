@@ -52,10 +52,11 @@ developing a Django Web application:
    (env) rickeyastley@ubuntu:~/my-django-app
    ```
 
-   > Note: You can also use Visual Studio Code (with Python extension) or
-   > PyCharm to open the source code directory that has a virtual environment
-   > directory. Both will detect the virtual environment and use the correct
-   > Python virtual environment in the text editor/IDE.
+   > Note: You can use [Visual Studio Code][] (with Python extension) or [PyCharm][]
+   > to open the source code directory that has a virtual environment directory.
+   > Both will detect the virtual environment and use the correct Python virtual
+   > environment. Furthermore, you can also run your shell directly in both text
+   > editor/IDE.
 7. Install the dependencies needed to build, test, and run the application:
 
    ```shell
@@ -75,7 +76,7 @@ The code template provided a GitHub workflow to deploy the sample Django Web
 application to [Heroku][], which is a Platform-as-a-Service (PaaS) provider
 that lets you to build and run a Web application on their infrastructure. You
 can read the instructions at [Tutorial 0][] to figure out how to configure the
-GitHub workflow in your repository.
+GitHub Actions to run the provided workflow in your repository.
 
 For reference, the deployed Django Web application example from the original
 code template repository can be found at: https://django-pbp-template.herokuapp.com.
@@ -96,3 +97,5 @@ This template was based on [PBP Odd Term 2021/2022](https://gitlab.com/PBP-2021/
 
 [Heroku]: https://www.heroku.com/
 [Tutorial 0]: https://pbp-fasilkom-ui.github.io/ganjil-2023/en/assignments/tutorial/tutorial-0
+[Visual Studio Code]: https://code.visualstudio.com/
+[PyCharm]: https://www.jetbrains.com/pycharm/
