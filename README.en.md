@@ -15,8 +15,9 @@ developing a Django Web application:
 
 1. Open the GitHub page of the code template repository and click "**Use this template**"
    button to make a copy of the repository into your own GitHub account.
-2. Clone the new Django template repository from your GitHub account to your local
-   development environment by using Git:
+2. Clone the new Django template repository from your GitHub account to a
+   location in the filesystem of your local development environment by using
+   Git:
 
    ```shell
    git clone <URL to your repository on GitHub> <path in local development environment>
