@@ -8,4 +8,22 @@
 {% block content %}
   <h1>Hello, world!</h1>
   <h3>This is example app for Django template</h3>
+  <table style="width:90%">
+    <thead>
+      <tr>
+        <th scope="col">Nama</th>
+        <th scope="col">Alamat</th>
+        <th scope="col">Kapasitas</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for line in record %}
+      <tr>
+        <td>{{line.1}}</td>
+        <td>{{line.2}}</td>
+        <td>{{line.3}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 {% endblock content %}
