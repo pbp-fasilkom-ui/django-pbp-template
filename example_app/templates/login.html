@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>U-League</title>
+{% endblock meta %}
+
+{% block content %}
+  <div class = "login bg-dark justify-content-center" style="height: 100vh; margin: 0;">
+    <br></br>
+    <div class="mx-3 d-flex flex-row flex-wrap justify-content-center">
+      <div class="alert alert-error alert-dismissible">
+    <div class="card mx-auto" style="width: 22rem;">
+        <div class="card-body mx-auto">
+          <h1 class="card-title"><strong>U-League - D10</strong></h1>
+        </div>
+        <div class="mx-3 d-flex flex-row flex-wrap justify-content-center">
+            <div class="card mx-auto" style="width: 22rem;">
+                <div class="card-body mx-auto">
+                  <h1 class="card-title"><strong>FORM LOGIN</strong></h1>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="">
+                        {% csrf_token %}
+            
+                                <a class="text-decoration-none text-dark">Username</a>
+                                <input type="text" name="username" placeholder="Username." class="form-control">
+                            
+                                <a class="text-decoration-none text-dark">Password</a>
+                                <input type="password" name="password" placeholder="Password." class="form-control">
+            
+                                <div class="div d-flex justify-content-center mt-3">
+                                <button type="button" class="btn btn-primary" type="submit" value="Login">Login</button>
+                               
+        
+                                </div>
+                                
+                                </div>
+                        
+                    </form>
+                </div>
+          
+          
+              </div>
+      </div>
+    </div>
+    </div>
+{% endblock content %}
