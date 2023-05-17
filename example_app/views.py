@@ -1,13 +1,13 @@
 from django.shortcuts import render
-from django.urls import reverse
-from django.http import HttpResponse, HttpResponseRedirect
 from utils.query import *
-from django.views.decorators.csrf import csrf_exempt
 
-@csrf_exempt 
 def index(request):
-    return render(request, 'login_atau_register.html')
- 
-def login(request):
-    return render(request, 'login.html')
-
+    cursor.execute(
+        f"SELECT * FROM STADIUM;"
+    )
+    record = cursor.fetchall()
+    
+    context = {
+        'record' : record
+    }
+    return render(request, 'index.html', context)
