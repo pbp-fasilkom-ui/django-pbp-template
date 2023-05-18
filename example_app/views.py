@@ -12,6 +12,86 @@ def showDashboard(request):
     return render(request, 'dashboard.html')
 
 def login(request):
+    if request.COOKIES.get('role'):
+        if request.COOKIES.get('role') == 'panitia':
+            uuid = request.get('uuid')
+
+            cursor.execute(f'select jabatan from panitia where id_panitia = \'{uuid}\'')
+
+            panitia = cursor.fetchmany()
+            jabatan = panitia[0][0]
+
+            query = f"""
+                select nama_depan, nama_belakang, nomor_hp, email, alamat
+                from non_pemain 
+                where id = \'{uuid}\';
+            """
+
+            cursor.execute(query)
+            non_pemain = cursor.fetchmany()
+            nama_depan = non_pemain[0][0]
+            nama_belakang = non_pemain[0][1]
+            nomor_hp = non_pemain[0][2]
+            email = non_pemain[0][3]
+            alamat = non_pemain[0][4]
+
+
+            cursor.execute(
+            f'select status from status_non_pemain where id_non_pemain = \'{uuid}\'')
+            status_non_pemain = cursor.fetchmany()
+            status = status_non_pemain[0][0]
+
+            context = {
+                'status': 'success',
+                'role': request.COOKIES.get('role'),
+                'nama_depan': nama_depan,
+                'nama_belakang': nama_belakang,
+                'nomor_hp': nomor_hp,
+                'email': email,
+                'alamat': alamat,
+                'status_non_pemain': status,
+                'jabatan' : jabtan,
+            }
+
+            response = render(request, 'dashboard.html', context)
+            return response
+        else :
+            uuid = request.COOKIES.get('uuid')
+
+            query = f"""
+                select nama_depan, nama_belakang, nomor_hp, email, alamat
+                from non_pemain 
+                where id = \'{uuid}\';
+            """
+
+            cursor.execute(query)
+            non_pemain = cursor.fetchmany()
+            nama_depan = non_pemain[0][0]
+            nama_belakang = non_pemain[0][1]
+            nomor_hp = non_pemain[0][2]
+            email = non_pemain[0][3]
+            alamat = non_pemain[0][4]
+
+
+            cursor.execute(
+            f'select status from status_non_pemain where id_non_pemain = \'{uuid}\'')
+            status_non_pemain = cursor.fetchmany()
+            status = status_non_pemain[0][0]
+
+            context = {
+                'status': 'success',
+                'role': request.COOKIES.get('role'),
+                'nama_depan': nama_depan,
+                'nama_belakang': nama_belakang,
+                'nomor_hp': nomor_hp,
+                'email': email,
+                'alamat': alamat,
+                'status_non_pemain': status,
+            }
+
+            response = render(request, 'dashboard.html', context)
+            return response
+
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -95,11 +175,36 @@ def login(request):
                 role = 'penonton'
                 uuid = penonton[0][0]
 
+                query = f"""
+                    select nama_depan, nama_belakang, nomor_hp, email, alamat
+                    from non_pemain 
+                    where id = \'{uuid}\';
+                """
+
+                cursor.execute(query)
+                non_pemain = cursor.fetchmany()
+
+                nama_depan = non_pemain[0][0]
+                nama_belakang = non_pemain[0][1]
+                nomor_hp = non_pemain[0][2]
+                email = non_pemain[0][3]
+                alamat = non_pemain[0][4]
+
+
+                cursor.execute(
+                f'select status from status_non_pemain where id_non_pemain = \'{uuid}\'')
+                status_non_pemain = cursor.fetchmany()
+                status = status_non_pemain[0][0]
+
                 context = {
                     'status': 'success',
-                    'username': user[0][0],
-                    'password': user[0][1],
-                    'role': role
+                    'role': role,
+                    'nama_depan': nama_depan,
+                    'nama_belakang': nama_belakang,
+                    'nomor_hp': nomor_hp,
+                    'email': email,
+                    'alamat': alamat,
+                    'status_non_pemain': status,
                 }
 
                 response = render(request, 'dashboard.html', context)
@@ -112,13 +217,44 @@ def login(request):
             f'select id_panitia from panitia where username = \'{username}\'')
             panitia = cursor.fetchmany()
             role = 'panitia'
-            uuid = penonton[0][0]
+            uuid = panitia[0][0]
+
+            cursor.execute(f'select jabatan from panitia where id_panitia = \'{uuid}\'')
+
+            panitia = cursor.fetchmany()
+            jabatan = panitia[0][0]
+
+            query = f"""
+                select nama_depan, nama_belakang, nomor_hp, email, alamat
+                from non_pemain 
+                where id = \'{uuid}\';
+            """
+
+            cursor.execute(query)
+            non_pemain = cursor.fetchmany()
+
+            nama_depan = non_pemain[0][0]
+            nama_belakang = non_pemain[0][1]
+            nomor_hp = non_pemain[0][2]
+            email = non_pemain[0][3]
+            alamat = non_pemain[0][4]
+
+
+            cursor.execute(
+            f'select status from status_non_pemain where id_non_pemain = \'{uuid}\'')
+            status_non_pemain = cursor.fetchmany()
+            status = status_non_pemain[0][0]
 
             context = {
                 'status': 'success',
-                'username': user[0][0],
-                'password': user[0][1],
-                'role': role
+                'role': role,
+                'nama_depan': nama_depan,
+                'nama_belakang': nama_belakang,
+                'nomor_hp': nomor_hp,
+                'email': email,
+                'alamat': alamat,
+                'status_non_pemain': status,
+                'jabatan' : jabatan,
             }
 
             response = render(request, 'dashboard.html', context)

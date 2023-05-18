@@ -19,6 +19,9 @@
               <h1 class="card-title"><strong>FORM LOGIN</strong></h1>
             </div>
             <div class="card-body">
+              {% if status == 'error' %}
+              <p class="">{{message}}</a>
+              {% endif %}
               <form method="POST" action="">
                 {% csrf_token %}
 

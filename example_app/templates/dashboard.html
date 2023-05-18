@@ -3,7 +3,10 @@
         <li>Nama : {{nama_depan}} {{nama_belakang}}</li>
         <li>Nomor telepon : {{nomor_hp}}</li>
         <li>Email : {{email}}</li>
-        <li>alamat: {{alamat}}</li>
-        <li>status: {{status_non_pemain}}</li>
+        <li>Alamat : {{alamat}}</li>
+        <li>Status : {{status_non_pemain}}</li>
+        {% if role == 'panitia' %}
+        <li>Jabatan : {{jabatan}} </li>
+        {% endif %}
       </ul>
 </div>
