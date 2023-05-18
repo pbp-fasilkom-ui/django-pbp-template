@@ -12,8 +12,51 @@
 </head>
 
 <body>
-  {% block content %}
-  {% endblock content %}
+  {% if role == 'manajer' %}
+  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+    <div class="d-flex justify-content-between px-3 w-100">
+        <div class="d-flex flex-grow-1 flex-shrink-0">
+            <a class="btn" href="{% url 'example_app:login' %}">Dashboard</a>
+            <a class="btn" href="#">Mengelola Tim</a>
+            <a class="btn" href="#">Peminjaman Stadium</a>
+            <a class="btn" href="#">List Pertandingan</a>
+            <a class="btn" href="#">History Rapat</a>
+        </div>
+        <div class="d-flex justify-content-end w-100">
+            <a class="btn btn-outline-danger d-block" href="{% url 'example_app:logout' %}">Logout</a>
+        </div>
+    </div>
+</nav>
+{% elif role == 'panitia' %}
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+  <div class="d-flex justify-content-between px-3 w-100">
+      <div class="d-flex flex-grow-1 flex-shrink-0">
+          <a class="btn" href="{% url 'example_app:login' %}">Dashboard</a>
+          <a class="btn" href="#">Rapat</a>
+          <a class="btn" href="#">Manage Pertandingan</a>
+      </div>
+      <div class="d-flex justify-content-end w-100">
+          <a class="btn btn-outline-danger d-block" href="{% url 'example_app:logout' %}">Logout</a>
+      </div>
+  </div>
+</nav>
+{% elif role == 'penonton' %}
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+  <div class="d-flex justify-content-between px-3 w-100">
+      <div class="d-flex flex-grow-1 flex-shrink-0">
+          <a class="btn" href="{% url 'example_app:login' %}">Dashboard</a>
+          <a class="btn" href="#">Pembelian Tiket</a>
+          <a class="btn" href="#">List Pertandingan</a>
+      </div>
+      <div class="d-flex justify-content-end w-100">
+          <a class="btn btn-outline-danger d-block" href="{% url 'example_app:logout' %}">Logout</a>
+      </div>
+  </div>
+</nav>
+{% else %}
+{% endif %}
+{% block content %}
+{% endblock content %}
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
