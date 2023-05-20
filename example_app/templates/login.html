@@ -21,6 +21,8 @@
             <div class="card-body">
               {% if status == 'error' %}
               <p class="">{{message}}</a>
+              {% elif status == 'registersuccess' %}
+              <p class="">{{message}}</a>
               {% endif %}
               <form method="POST" action="">
                 {% csrf_token %}

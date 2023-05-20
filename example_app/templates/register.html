@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Register U-League</title>
+{% endblock meta %}
+
+{% block content %}
+<div class="mx-3 d-flex flex-row flex-wrap justify-content-center">
+    <div class="alert alert-error alert-dismissible">
+  <div class="card mx-auto" style="width: 22rem;">
+      <div class="card-body mx-auto">
+        <h1 class="card-title"><strong>REGISTER</strong></h1>
+      </div>
+      <div class="card-body">
+  
+        <a class="btn btn-primary mx-1" type="button" value="Login" href="{% url 'example_app:register_manajer' %}"> Manajer</a>
+        <a class="btn btn-primary mx-1" type="button" value="Login" href="{% url 'example_app:register_penonton' %}"> Penonton</a>
+        <a class="btn btn-primary mx-1" type="button" value="Login" href="{% url 'example_app:register_panitia' %}"> Panitia</a>
+                      
+
+      </div>
+
+    </div>
+  </div>
+  </div>
+{% endblock content %}

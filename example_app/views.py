@@ -173,7 +173,189 @@ def logout_user(request):
         response.delete_cookie(cookie)
     return response
 
+def register_select(request):
+    return render(request, 'register.html')
 
 
+def register_manajer(request):
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        nama_depan = request.POST.get('nama_depan')
+        nama_belakang = request.POST.get('nama_belakang')
+        nomor_hp = request.POST.get('nomor_hp')
+        email = request.POST.get('email')
+        alamat = request.POST.get('alamat')
+        status = request.POST.get('radio_status')
+
+        try:
+            # Execute insertion test on username
+            cursor.execute(
+                f'INSERT INTO user_system (username, password) VALUES (\'{username}\', \'{password}\');'
+            )
+            connection.commit()
     
+        except Exception as e:
+            connection.rollback()
+            context = {
+                'message': 'Username telah digunakan, silahkan gunakan username lain!',
+                'status': 'error',
+            }
+            return render(request, 'register_manajer.html', context)
+        
+        # Generate UUID
+        cursor.execute(
+            f'SELECT uuid_generate_v1();'
+        )
+        uuid = cursor.fetchone()[0]
 
+        # Insert table non pemain
+        cursor.execute(
+            f'''INSERT INTO Non_Pemain (ID, Nama_Depan, Nama_Belakang, Nomor_HP, Email, Alamat) 
+            VALUES (\'{uuid}\', \'{nama_depan}\', \'{nama_belakang}\', \'{nomor_hp}\', \'{email}\', \'{alamat}\');'''
+        )
+        connection.commit()
+
+        # Insert table manajer
+        cursor.execute(
+            f'''INSERT INTO Manajer (ID_Manajer, Username) 
+            VALUES (\'{uuid}\', \'{username}\');'''
+        )
+        connection.commit()
+
+        # Insert table status_non_pemain
+        cursor.execute(
+            f'''INSERT INTO Status_Non_Pemain (ID_Non_Pemain, Status) 
+            VALUES (\'{uuid}\', \'{status}\');'''
+        )
+        connection.commit()
+
+        context = {
+            'message': 'Registrasi berhasil, silahkan login kedalam sistem',
+            'status': 'registersuccess',
+        }
+        return render(request, 'login.html', context)
+    return render(request, 'register_manajer.html')
+
+def register_penonton(request):
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        nama_depan = request.POST.get('nama_depan')
+        nama_belakang = request.POST.get('nama_belakang')
+        nomor_hp = request.POST.get('nomor_hp')
+        email = request.POST.get('email')
+        alamat = request.POST.get('alamat')
+        status = request.POST.get('radio_status')
+
+        try:
+            # Execute insertion test on username
+            cursor.execute(
+                f'INSERT INTO user_system (username, password) VALUES (\'{username}\', \'{password}\');'
+            )
+            connection.commit()
+
+        except Exception as e:
+            connection.rollback()
+            context = {
+                'message': 'Username telah digunakan, silahkan gunakan username lain!',
+                'status': 'error',
+            }
+            return render(request, 'register_penonton.html', context)
+        
+        # Generate UUID
+        cursor.execute(
+            f'SELECT uuid_generate_v1();'
+        )
+        uuid = cursor.fetchone()[0]
+
+        # Insert table non pemain
+        cursor.execute(
+            f'''INSERT INTO Non_Pemain (ID, Nama_Depan, Nama_Belakang, Nomor_HP, Email, Alamat) 
+            VALUES (\'{uuid}\', \'{nama_depan}\', \'{nama_belakang}\', \'{nomor_hp}\', \'{email}\', \'{alamat}\');'''
+        )
+        connection.commit()
+
+        # Insert table penonton
+        cursor.execute(
+            f'''INSERT INTO Penonton (ID_penonton, Username) 
+            VALUES (\'{uuid}\', \'{username}\');'''
+        )
+        connection.commit()
+
+        # Insert table status_non_pemain
+        cursor.execute(
+            f'''INSERT INTO Status_Non_Pemain (ID_Non_Pemain, Status) 
+            VALUES (\'{uuid}\', \'{status}\');'''
+        )
+        connection.commit()
+
+        context = {
+            'message': 'Registrasi berhasil, silahkan login kedalam sistem',
+            'status': 'registersuccess',
+        }
+        return render(request, 'login.html', context)
+    return render(request, 'register_penonton.html')
+
+def register_panitia(request):
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        nama_depan = request.POST.get('nama_depan')
+        nama_belakang = request.POST.get('nama_belakang')
+        nomor_hp = request.POST.get('nomor_hp')
+        email = request.POST.get('email')
+        alamat = request.POST.get('alamat')
+        status = request.POST.get('radio_status')
+        jabatan = request.POST.get('jabatan')
+
+        try:
+            # Execute insertion test on username
+            cursor.execute(
+                f'INSERT INTO user_system (username, password) VALUES (\'{username}\', \'{password}\');'
+            )
+            connection.commit()
+
+        except Exception as e:
+            connection.rollback()
+            context = {
+                'message': 'Username telah digunakan, silahkan gunakan username lain!',
+                'status': 'error',
+            }
+            return render(request, 'register_panitia.html', context)
+        
+        # Generate UUID
+        cursor.execute(
+            f'SELECT uuid_generate_v1();'
+        )
+        uuid = cursor.fetchone()[0]
+
+        # Insert table non pemain
+        cursor.execute(
+            f'''INSERT INTO Non_Pemain (ID, Nama_Depan, Nama_Belakang, Nomor_HP, Email, Alamat) 
+            VALUES (\'{uuid}\', \'{nama_depan}\', \'{nama_belakang}\', \'{nomor_hp}\', \'{email}\', \'{alamat}\');'''
+        )
+        connection.commit()
+
+        # Insert table panitia
+        cursor.execute(
+            f'''INSERT INTO Panitia (ID_panitia, jabatan, Username) 
+            VALUES (\'{uuid}\', \'{jabatan}\', \'{username}\');'''
+        )
+        connection.commit()
+
+        # Insert table status_non_pemain
+        cursor.execute(
+            f'''INSERT INTO Status_Non_Pemain (ID_Non_Pemain, Status) 
+            VALUES (\'{uuid}\', \'{status}\');'''
+        )
+        connection.commit()
+
+        context = {
+            'message': 'Registrasi berhasil, silahkan login kedalam sistem',
+            'status': 'registersuccess',
+        }
+        return render(request, 'login.html', context)
+    return render(request, 'register_panitia.html')
+        
+        
