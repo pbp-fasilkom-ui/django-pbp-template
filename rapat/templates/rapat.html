@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Rapat</title>
+<style>
+    h1 {
+      text-align: center;
+      padding-bottom: 10px;
+    }
+    table {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+{% endblock meta %}
+
+{% block content %}
+<div>
+<h1 >Jadwal rapat pertandingan</h1>
+<br>
+<table class="table table-striped" style="width:90%">
+    <thead>
+      <tr>
+        <th scope="col">Tim Bertanding</th>
+        <th scope="col">Stadium</th>
+        <th scope="col">Tanggal dan Waktu Mulai</th>
+        <th scope="col">Tanggal dan Waktu Akhir</th>
+        <th scope="col" style="width:15%">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    {% for line in rapat %}
+    <tr>
+    <td>{{line.0}}</td>
+    <td>{{line.1}}</td>
+    <td>{{line.2}}</td>
+    <td>{{line.3}}</td>
+    <td><a class="btn btn-outline-success" href="/rapat/buat/{{line.4}}/{{line.0}}">Mulai Rapat</a></td>
+    </tr>
+    {% endfor %}
+  
+    </tbody>
+  </table>
+</div>
+{% endblock content %}
