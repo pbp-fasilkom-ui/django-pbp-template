@@ -9,12 +9,9 @@ def index(request):
     return render(request, 'login_atau_register.html')
 
 def showDashboard(request):
-    return render(request, 'dashboard.html')
-
-def login(request):
     if request.COOKIES.get('role'):
         if request.COOKIES.get('role') == 'panitia':
-            uuid = request.get('uuid')
+            uuid = request.COOKIES.get('uuid')
 
             cursor.execute(f'select jabatan from panitia where id_panitia = \'{uuid}\'')
 
@@ -50,7 +47,7 @@ def login(request):
                 'email': email,
                 'alamat': alamat,
                 'status_non_pemain': status,
-                'jabatan' : jabtan,
+                'jabatan' : jabatan,
             }
 
             response = render(request, 'dashboard.html', context)
@@ -91,7 +88,13 @@ def login(request):
 
             response = render(request, 'dashboard.html', context)
             return response
+        
+    else:
+        return HttpResponseRedirect(reverse('example_app:index'))
 
+def login(request):
+    if request.COOKIES.get('role'):
+        return HttpResponseRedirect(reverse('example_app:dashboard'))
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -129,39 +132,7 @@ def login(request):
                 role = 'manajer'
                 uuid = manajer[0][0]
 
-                query = f"""
-                    select nama_depan, nama_belakang, nomor_hp, email, alamat
-                    from non_pemain 
-                    where id = \'{uuid}\';
-                """
-
-                cursor.execute(query)
-                non_pemain = cursor.fetchmany()
-
-                nama_depan = non_pemain[0][0]
-                nama_belakang = non_pemain[0][1]
-                nomor_hp = non_pemain[0][2]
-                email = non_pemain[0][3]
-                alamat = non_pemain[0][4]
-
-
-                cursor.execute(
-                f'select status from status_non_pemain where id_non_pemain = \'{uuid}\'')
-                status_non_pemain = cursor.fetchmany()
-                status = status_non_pemain[0][0]
-
-                context = {
-                    'status': 'success',
-                    'role': role,
-                    'nama_depan': nama_depan,
-                    'nama_belakang': nama_belakang,
-                    'nomor_hp': nomor_hp,
-                    'email': email,
-                    'alamat': alamat,
-                    'status_non_pemain': status,
-                }
-
-                response = render(request, 'dashboard.html', context)
+                response = HttpResponseRedirect(reverse('example_app:dashboard'))
                 response.set_cookie('role', role)
                 response.set_cookie('uuid', uuid)
                 response.set_cookie('username', username)
@@ -175,39 +146,7 @@ def login(request):
                 role = 'penonton'
                 uuid = penonton[0][0]
 
-                query = f"""
-                    select nama_depan, nama_belakang, nomor_hp, email, alamat
-                    from non_pemain 
-                    where id = \'{uuid}\';
-                """
-
-                cursor.execute(query)
-                non_pemain = cursor.fetchmany()
-
-                nama_depan = non_pemain[0][0]
-                nama_belakang = non_pemain[0][1]
-                nomor_hp = non_pemain[0][2]
-                email = non_pemain[0][3]
-                alamat = non_pemain[0][4]
-
-
-                cursor.execute(
-                f'select status from status_non_pemain where id_non_pemain = \'{uuid}\'')
-                status_non_pemain = cursor.fetchmany()
-                status = status_non_pemain[0][0]
-
-                context = {
-                    'status': 'success',
-                    'role': role,
-                    'nama_depan': nama_depan,
-                    'nama_belakang': nama_belakang,
-                    'nomor_hp': nomor_hp,
-                    'email': email,
-                    'alamat': alamat,
-                    'status_non_pemain': status,
-                }
-
-                response = render(request, 'dashboard.html', context)
+                response = HttpResponseRedirect(reverse('example_app:dashboard'))
                 response.set_cookie('role', role)
                 response.set_cookie('uuid', uuid)
                 response.set_cookie('username', username)
@@ -219,45 +158,7 @@ def login(request):
             role = 'panitia'
             uuid = panitia[0][0]
 
-            cursor.execute(f'select jabatan from panitia where id_panitia = \'{uuid}\'')
-
-            panitia = cursor.fetchmany()
-            jabatan = panitia[0][0]
-
-            query = f"""
-                select nama_depan, nama_belakang, nomor_hp, email, alamat
-                from non_pemain 
-                where id = \'{uuid}\';
-            """
-
-            cursor.execute(query)
-            non_pemain = cursor.fetchmany()
-
-            nama_depan = non_pemain[0][0]
-            nama_belakang = non_pemain[0][1]
-            nomor_hp = non_pemain[0][2]
-            email = non_pemain[0][3]
-            alamat = non_pemain[0][4]
-
-
-            cursor.execute(
-            f'select status from status_non_pemain where id_non_pemain = \'{uuid}\'')
-            status_non_pemain = cursor.fetchmany()
-            status = status_non_pemain[0][0]
-
-            context = {
-                'status': 'success',
-                'role': role,
-                'nama_depan': nama_depan,
-                'nama_belakang': nama_belakang,
-                'nomor_hp': nomor_hp,
-                'email': email,
-                'alamat': alamat,
-                'status_non_pemain': status,
-                'jabatan' : jabatan,
-            }
-
-            response = render(request, 'dashboard.html', context)
+            response = HttpResponseRedirect(reverse('example_app:dashboard'))
             response.set_cookie('role', role)
             response.set_cookie('uuid', uuid)
             response.set_cookie('username', username)
@@ -265,6 +166,14 @@ def login(request):
 
 
     return render(request, 'login.html')
+
+def logout_user(request):
+    response = HttpResponseRedirect(reverse('example_app:index'))
+    for cookie in request.COOKIES:
+        response.delete_cookie(cookie)
+    return response
+
+
 
     
 
