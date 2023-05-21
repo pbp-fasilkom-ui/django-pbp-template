@@ -6,6 +6,8 @@ from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt 
 def index(request):
+    if request.COOKIES.get('role'):
+        return HttpResponseRedirect(reverse('example_app:dashboard'))
     return render(request, 'login_atau_register.html')
 
 def showDashboard(request):

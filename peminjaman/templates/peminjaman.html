@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Peminjaman</title>
+<style>
+    h1 {
+      text-align: center;
+      padding-bottom: 10px;
+    }
+    table {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+{% endblock meta %}
+
+{% block content %}
+<div>
+<h1>List Pemesanan</h1>
+
+<br>
+
+{% if message %}
+<p class="">{{message}}</a>
+{% endif %}
+
+<br>
+<table class="table table-striped" style="width:90%">
+    <thead>
+      <tr>
+        <th scope="col">Stadium</th>
+        <th scope="col">Tanggal dan Waktu Mulai</th>
+        <th scope="col">Tanggal dan Waktu Akhir</th>
+        <th scope="col" style="width:15%">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for line in peminjaman %}
+    <tr>
+    <td>{{line.0}}</td>
+    <td>{{line.1}}</td>
+    <td>{{line.2}}</td>
+    <td><a class="btn btn-warning" href="/peminjaman/edit/{{line.1}}">Edit</a></td>
+    </tr>
+    {% endfor %}
+
+    <tr>
+        <td colspan="4"><a class="btn btn-success" name="buat" href="/peminjaman/buat">Buat</a></td>
+    </tr>
+  
+    </tbody>
+
+  </table>
+</div>
+{% endblock content %}

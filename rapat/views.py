@@ -19,7 +19,7 @@ def rapat(request):
             NOT IN (SELECT rapat.id_pertandingan FROM rapat) GROUP BY P.id_pertandingan, S.nama;
             '''
             cursor.execute(query1)
-            rapat = cursor.fetchmany()
+            rapat = cursor.fetchall()
 
             context = {
                 'rapat': rapat,
@@ -66,8 +66,6 @@ def buat_rapat(request,id,vs):
                 connection.commit()
 
                 return HttpResponseRedirect(reverse('example_app:dashboard'))
-
-
 
             return render(request, 'buat_rapat.html', context)
         else:
