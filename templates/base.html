@@ -16,9 +16,9 @@
   <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
     <div class="d-flex justify-content-between px-3 w-100">
         <div class="d-flex flex-grow-1 flex-shrink-0">
-            <a class="btn" href="{% url 'example_app:login' %}">Dashboard</a>
+            <a class="btn" href="{% url 'example_app:dashboard' %}">Dashboard</a>
             <a class="btn" href="#">Mengelola Tim</a>
-            <a class="btn" href="#">Peminjaman Stadium</a>
+            <a class="btn" href="{% url 'peminjaman:peminjaman' %}">Peminjaman Stadium</a>
             <a class="btn" href="#">List Pertandingan</a>
             <a class="btn" href="#">History Rapat</a>
         </div>
@@ -31,8 +31,8 @@
 <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
   <div class="d-flex justify-content-between px-3 w-100">
       <div class="d-flex flex-grow-1 flex-shrink-0">
-          <a class="btn" href="{% url 'example_app:login' %}">Dashboard</a>
-          <a class="btn" href="#">Rapat</a>
+          <a class="btn" href="{% url 'example_app:dashboard' %}">Dashboard</a>
+          <a class="btn" href="{% url 'rapat:rapat' %}">Rapat</a>
           <a class="btn" href="#">Manage Pertandingan</a>
       </div>
       <div class="d-flex justify-content-end w-100">
@@ -44,7 +44,7 @@
 <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
   <div class="d-flex justify-content-between px-3 w-100">
       <div class="d-flex flex-grow-1 flex-shrink-0">
-          <a class="btn" href="{% url 'example_app:login' %}">Dashboard</a>
+          <a class="btn" href="{% url 'example_app:dashboard' %}">Dashboard</a>
           <a class="btn" href="#">Pembelian Tiket</a>
           <a class="btn" href="#">List Pertandingan</a>
       </div>

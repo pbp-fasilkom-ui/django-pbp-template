@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Buat Rapat</title>
+<style>
+    h1 {
+      text-align: center;
+      padding-bottom: 10px;
+    }
+    .card {
+      width: 900px;
+    }
+    
+    #buttonSubmit {
+      margin-top: 10px;
+    }
+  </style>
+{% endblock meta %}
+
+{% block content %}
+<div>
+  <!-- HEADER -->
+  <h1 >Rapat Pertandingan {{vs}}</h1>
+
+  <!-- CARD -->
+  <div class="row justify-content-center">
+    <div class="card">
+      <div class="card-body">
+        <a class="btn btn-outline-danger" href="/rapat"> Kembali</a>
+        <form method="POST" action="">
+        {% csrf_token %}
+        <h4>Isi Rapat: </h4>
+        <textarea class="form-control" name="isi" rows="3"></textarea>
+        <div class="d-flex justify-content-center">
+          <input class="btn btn-success" type="submit" value="SUBMIT"></input>
+        </div>
+    </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+{% endblock content %}

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Edit Peminjaman</title>
+<style>
+    h1 {
+      text-align: center;
+      padding-bottom: 10px;
+    }
+    .card {
+      width: 900px;
+    }
+    
+    #buttonSubmit {
+      margin-top: 10px;
+    }
+  </style>
+{% endblock meta %}
+
+{% block content %}
+<div>
+  <!-- HEADER -->
+  <h1>EDIT PEMINJAMAN STADIUM</h1>
+
+  <!-- CARD -->
+  <div class="row justify-content-center">
+    <div class="card">
+      <div class="card-body">
+ 
+        <a class="btn btn-outline-danger" href="/peminjaman">Kembali </a>
+        {% if message %}
+        <a class="text-decoration-none text-danger">{{message}}</a>
+        {% endif %}
+        <form method="POST" action="">
+        {% csrf_token %}
+        <h4>Stadium: </h4>
+        <select class="form-select" aria-label="Default select example" name="stadium">
+            {% for line in stadium %}
+            <option value="{{line.1}}" >{{line.0}}</option>
+            {% endfor %}
+          </select>
+          <br>
+        <div class="d-flex justify-content-center">
+          <input class="btn btn-success" type="submit" value="SUBMIT"></input>
+        </div>
+    </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<script>
+document.getElementById('tanggal_pinjam').value = new Date().toISOString().slice(0, 10);
+</script>
+
+
+{% endblock content %}

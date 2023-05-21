@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'example_app',
+    'rapat',
+    'peminjaman',
 ]
 
 MIDDLEWARE = [
@@ -84,7 +86,8 @@ DATABASES = {
         'USER' : 'postgres',
         'PASSWORD' : 'voqCmidHYb879t8OF1VL',
         'HOST' : 'containers-us-west-155.railway.app',
-        'PORT' : '7210'
+        'PORT' : '7210',
+        
     },
 }
 

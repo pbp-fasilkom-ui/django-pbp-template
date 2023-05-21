@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Register U-League</title>
+{% endblock meta %}
+
+{% block content %}
+<div class="mx-3 d-flex flex-row flex-wrap justify-content-center">
+    <div class="alert alert-error alert-dismissible">
+  <div class="card mx-auto" style="width: 22rem;">
+      <div class="card-body mx-auto">
+        <h1 class="card-title"><strong>FORM REGISTER</strong></h1>
+      </div>
+      <div class="card-body">
+          <form method="POST" action="">
+            {% csrf_token %}
+
+            {% if status == 'error' %}
+            <p class="">{{message}}</a>
+            {% endif %}
+            <br>
+            <p>Username</p>
+            <input type="text" name="username" placeholder="username" class="form-control">
+
+            <p>Password</p>
+            <input type="password" name="password" placeholder="*******" class="form-control">
+  
+            <p>Nama Depan</p>
+            <input type="text" name="nama_depan" placeholder="John" class="form-control">
+        
+                
+            <p>Nama Belakang</p>
+            <input type="text" name="nama_belakang" placeholder="Doe" class="form-control">
+
+            <p>Nomor Handphone</p>
+            <input type="text" name="nomor_hp" placeholder="+62XXXXXXXXX" class="form-control">
+
+            <p>Email</p>
+            <input type="text" name="email" placeholder="example@example.com" class="form-control">
+
+            <p>Alamat</p>
+            <input type="text" name="alamat" placeholder="Santa avenue 31st" class="form-control">
+            
+            <br>
+            
+            <input class="form-check-input" type="radio" name="radio_status" id="flexRadioDefault1" value="mahasiswa">Mahasiswa</input>
+            <input class="form-check-input" type="radio" name="radio_status" id="flexRadioDefault1" value="dosen">Dosen</input>
+            <input class="form-check-input" type="radio" name="radio_status" id="flexRadioDefault1" value="tendik">Tendik</input>
+            <input class="form-check-input" type="radio" name="radio_status" id="flexRadioDefault1" value="alumni">Alumni</input>
+            <input class="form-check-input" type="radio" name="radio_status" id="flexRadioDefault1" value="umum">Umum</input>
+
+            <p>Jabatan</p>
+            <input type="text" name="jabatan" placeholder="Ketua" class="form-control">
+
+            <div class="div d-flex justify-content-center mt-3">
+              <input class="btn btn-primary" type="submit" value="DAFTAR">
+              </div>
+                      
+                      
+              
+          </form>
+      </div>
+
+    </div>
+  </div>
+  </div>
+
+{% endblock content %}
