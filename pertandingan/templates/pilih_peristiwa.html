@@ -5,56 +5,69 @@
 {% endblock meta %}
 
 {% block content %}
-<h5 class="modal-title" id="tambahPeristiwaLabel">Pilih Peristiwa TIM 1</h5>
-<div class="mx-auto">
-    <table class="table text-center	">
-        <thead>
-            <tr>
-                <th>Nama Pemain</th>
-                <th>Peristiwa</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    <div class="form-group">
-                        <select class="form-control">
-                            <option value="">-- Pilih Pemain --</option>
-                            <option value="pemain1">Pemain 1</option>
-                            <option value="pemain2">Pemain 2</option>
-                            <option value="pemain3">Pemain 3</option>
-                            <option value="pemain4">Pemain 4</option>
-                            <option value="pemain5">Pemain 5</option>
-                            <option value="pemain6">Pemain 6</option>
-                            <option value="pemain7">Pemain 7</option>
-                            <option value="pemain8">Pemain 8</option>
-                            <option value="pemain9">Pemain 9</option>
-                            <option value="pemain10">Pemain 10</option>
-                            <option value="pemain11">Pemain 11</option>
-                            <option value="pemain12">Pemain 12</option>
-                            <option value="pemain13">Pemain 13</option>
-                            <option value="pemain14">Pemain 14</option>
-                        </select>
-                    </div>
-                </td>
-                <td>
-                    <div class="form-group">
-                        <select class="form-control">
-                            <option value="">-- Pilih Peristiwa --</option>
-                            <option value="kartu kuning">Kartu Kuning</option>
-                            <option value="kartu merah">Kartu Merah</option>
-                            <option value="assist">Assist</option>
-                            <option value="gol">Gol</option>
-                        </select>
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
 
-    <button type="button" class="btn btn-primary mx-auto">Selesai</button>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card mx-auto mt-4">
+                <div class="card-body">
+                    <h5 class="modal-title text-center" id="tambahPeristiwaLabel">Pilih Peristiwa {{nama_tim}}</h5>
+                    <div class="mx-auto">
+                        <div>{{request}}</div>
+                        <table class="table text-center	">
+                            <thead>
+                                <tr>
+                                    <th>Nama Pemain</th>
+                                    <th>Peristiwa</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for peristiwa in daftar_peristiwa %}
+                                <tr>
+                                    <td>{{peristiwa.0}}</td>
+                                    <td>{{peristiwa.1}}</td>
+                                </tr>
+                                {% endfor %}
+                                <form method="POST" action="" id="form-peristiwa">
+                                    {% csrf_token %}
+                                    <tr>
+                                        <td>
+                                            <div class="form-group ">
+                                                <select class="form-control text-center" name="pemain" form="form-peristiwa">
+                                                    <option value="">-- Pilih Pemain --</option>
+                                                    {% for pemain in daftar_pemain %}
+                                                    <option value={{pemain.0}}>{{pemain.1}}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <select class="form-control text-center"  name="jenis" form="form-peristiwa">
+                                                    <option value="">-- Pilih Peristiwa --</option>
+                                                    <option value="kartu kuning">Kartu Kuning</option>
+                                                    <option value="kartu merah">Kartu Merah</option>
+                                                    <option value="assist">Assist</option>
+                                                    <option value="gol">Gol</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </form>
+                            </tbody>
+                        </table>
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" form="form-peristiwa" class="btn btn-primary">Selesai</button>
 
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
 
 
 {% endblock content %}
