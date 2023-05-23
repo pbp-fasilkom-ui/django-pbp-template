@@ -4,6 +4,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from utils.query import *
 from django.views.decorators.csrf import csrf_exempt
 from datetime import datetime, timedelta
+from django.urls import reverse
+from django.shortcuts import redirect
 
 
 def get_peristiwa(id_pertandingan, nama_tim):
@@ -36,7 +38,6 @@ def get_pemain(nama_tim):
 def pertandingan(request):
     if request.COOKIES.get('role'):
         if request.COOKIES.get('role') == 'panitia':
-            id_panitia = request.COOKIES.get('uuid')
 
             query_pertandingan = f"""
                 SELECT ID_pertandingan, start_datetime 
@@ -46,7 +47,6 @@ def pertandingan(request):
             daftar_pertandingan = cursor.fetchall()
 
             daftar_pertandingan_fix = []
-            peristiwa_tim1_fix = []
 
             for pertandingan in daftar_pertandingan:
                 UUID_pertandingan = pertandingan[0]
@@ -110,9 +110,6 @@ def mulai_pertandingan(request, id_pertandingan):
             nama_tim1 = tim_pertandingan[0][1]
             nama_tim2 = tim_pertandingan[1][1]
 
-            peristiwa_tim1 = get_peristiwa(id_pertandingan, nama_tim1)
-            peristiwa_tim2 = get_peristiwa(id_pertandingan, nama_tim2)
-
             context = {
                 'id_pertandingan': id_pertandingan,
                 'tim1': nama_tim1,
@@ -131,52 +128,52 @@ def pilih_peristiwa(request, id_pertandingan, nama_tim):
     if request.COOKIES.get('role'):
         if request.COOKIES.get('role') == 'panitia':
 
-            daftar_pemain = get_pemain(nama_tim)
-            peristiwa = get_peristiwa(id_pertandingan, nama_tim)
-
             if request.method == "POST":
                 
                 input_id_pemain = request.POST.get('pemain')
                 input_jenis_peristiwa = request.POST.get('jenis')
 
-                # tanggal_pinjam = tanggal
+                if (input_jenis_peristiwa == "" or input_id_pemain == "") :
+                    return redirect('pertandingan:mulai_pertandingan',id_pertandingan)
 
-                # stadium = request.POST.get('stadium')
+                insert_peristiwa = f'''
+                INSERT INTO Peristiwa (ID_Pertandingan, Datetime, Jenis, ID_Pemain) 
+                VALUES (\'{id_pertandingan}\', \'{datetime.now()}\',\'{input_jenis_peristiwa}\', \'{input_id_pemain}\');
+                '''
+                try:
+                    cursor.execute(insert_peristiwa)
+                    connection.commit()
+                
+                except Exception as e:
+                    connection.rollback()
 
-                # cursor.execute(f"select TIMESTAMP \'{tanggal_pinjam}\' + interval '0 hour' as tanggal;")
-                # tanggal_waktu_mulai = cursor.fetchall()[0][0]
+                    pesan_error = "Pemain yang sudah terkena kartu merah tidak dapat lagi bermain"
 
-                # cursor.execute(f"select TIMESTAMP \'{tanggal_pinjam}\' + interval '3 hour' as tanggal;")
-                # tanggal_waktu_akhir = cursor.fetchall()[0][0]
+                    daftar_pemain = get_pemain(nama_tim)
+                    peristiwa = get_peristiwa(id_pertandingan, nama_tim)
+                    context = {
+                        'daftar_peristiwa': peristiwa,
+                        'daftar_pemain': daftar_pemain,
+                        'nama_tim': nama_tim,
+                        'role': 'panitia',
+                        'pesan_error': pesan_error,
+                    }
+                    return render(request, 'pilih_peristiwa.html', context)
 
-                # panitia = request.COOKIES.get('uuid')
+            
+                daftar_pemain = get_pemain(nama_tim)
+                peristiwa = get_peristiwa(id_pertandingan, nama_tim)
 
-                # try:
-                #     cursor.execute( f'''
-                #     UPDATE pertandingan SET id_stadium = \'{stadium}\'
-                #     WHERE id_panitia = \'{panitia}\'
-                #     and start_datetime = \'{tanggal_waktu_mulai}\'
-                #     and end_datetime =  \'{tanggal_waktu_akhir}\';
-                #     ''')
-                #     connection.commit()
-                #     return HttpResponseRedirect(reverse('pertandingan:pertandingan'))
-                # except Exception as e:
-                #     connection.rollback()
-                #     query1 = f'''
-                #     select nama, id_stadium from stadium;
-                #     '''
-                #     cursor.execute(query1)
-                #     stadium = cursor.fetchall()
                 context = {
                     'daftar_peristiwa': peristiwa,
                     'daftar_pemain': daftar_pemain,
                     'nama_tim': nama_tim,
-                    'request': request.POST.get('jenis'),
                     'role': 'panitia',
                 }
                 return render(request, 'pilih_peristiwa.html', context)
 
-
+            daftar_pemain = get_pemain(nama_tim)
+            peristiwa = get_peristiwa(id_pertandingan, nama_tim)
 
             context = {
                 'daftar_peristiwa': peristiwa,
