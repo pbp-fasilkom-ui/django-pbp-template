@@ -52,7 +52,7 @@ def pertandingan(request):
                 UUID_pertandingan = pertandingan[0]
                 datetime_pertandingan = pertandingan[1]
 
-                datetime_pertandingan = datetime.now() + timedelta(minutes=4)  # for testing
+                # datetime_pertandingan = datetime.now() + timedelta(minutes=4)  # for testing
                 status = ""
                 countdown_mulai = (datetime_pertandingan -
                                    datetime.now()).total_seconds() / 60
