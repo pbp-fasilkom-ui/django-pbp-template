@@ -110,12 +110,10 @@ def login(request):
                 'message': 'Username tidak ditemukan!',
                 'status': 'error',
             }
-            return render(request, 'login.html', context)
-                
+            return render(request, 'login.html', context)       
 
         username_database=user[0][0]
         password_database=user[0][1]
-
 
         if(username != username_database or password != password_database):
             context = {
