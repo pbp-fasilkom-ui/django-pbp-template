@@ -70,10 +70,17 @@ def pertandingan(request):
                 '''
                 cursor.execute(get_tim_pertandingan)
                 tim_pertandingan = cursor.fetchmany(2)
-                nama_tim1 = tim_pertandingan[0][1] if tim_pertandingan[0][1] else "-"
-                nama_tim2 = tim_pertandingan[1][1] if tim_pertandingan[1][1] else "-"
-                skor_tim1 = tim_pertandingan[0][0] if tim_pertandingan[0][0] else "-"
-                skor_tim2 = tim_pertandingan[1][0] if tim_pertandingan[1][0] else "-"
+
+                if (len(tim_pertandingan) == 0): 
+                    nama_tim1 = "-"
+                    nama_tim2 = "-"
+                    skor_tim1 = "-"
+                    skor_tim2 = "-"
+                else:   
+                    nama_tim1 = tim_pertandingan[0][1] if tim_pertandingan[0][1] else "-"
+                    nama_tim2 = tim_pertandingan[1][1] if tim_pertandingan[1][1] else "-"
+                    skor_tim1 = tim_pertandingan[0][0] if tim_pertandingan[0][0] else "-"
+                    skor_tim2 = tim_pertandingan[1][0] if tim_pertandingan[1][0] else "-"
 
                 peristiwa_tim1 = get_peristiwa(UUID_pertandingan, nama_tim1)
                 peristiwa_tim2 = get_peristiwa(UUID_pertandingan, nama_tim2)
@@ -87,6 +94,7 @@ def pertandingan(request):
             context = {
                 'daftar_pertandingan': daftar_pertandingan_fix,
                 'role': 'panitia',
+                'test': tim_pertandingan
             }
 
             return render(request, 'mengelola_pertandingan.html', context)
