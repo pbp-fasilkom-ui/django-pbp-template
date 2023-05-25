@@ -5,7 +5,7 @@ from utils.query import *
 from django.views.decorators.csrf import csrf_exempt
 from datetime import datetime
 
-
+@csrf_exempt 
 def peminjaman(request):
     if request.COOKIES.get('role'):
         if request.COOKIES.get('role') == 'manajer':
@@ -31,6 +31,7 @@ def peminjaman(request):
     else:
         return HttpResponseRedirect(reverse('example_app:index'))
 
+@csrf_exempt 
 def buat_peminjaman(request):
     if request.COOKIES.get('role'):
         if request.COOKIES.get('role') == 'manajer':
@@ -87,7 +88,7 @@ def buat_peminjaman(request):
     else:
         return HttpResponseRedirect(reverse('example_app:index'))
 
-
+@csrf_exempt 
 def edit_peminjaman(request, tanggal):
     if request.COOKIES.get('role'):
         if request.COOKIES.get('role') == 'manajer':

@@ -7,6 +7,7 @@ import datetime
 
 # Create your views here.
 
+@csrf_exempt 
 def rapat(request):
     if request.COOKIES.get('role'):
         if request.COOKIES.get('role') == 'panitia':
@@ -31,6 +32,7 @@ def rapat(request):
     else:
         return HttpResponseRedirect(reverse('example_app:index'))
 
+@csrf_exempt 
 def buat_rapat(request,id,vs):
     if request.COOKIES.get('role'):
         if request.COOKIES.get('role') == 'panitia':
