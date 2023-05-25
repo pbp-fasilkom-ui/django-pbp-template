@@ -5,7 +5,7 @@ from utils.query import *
 from django.views.decorators.csrf import csrf_exempt
 from datetime import datetime
 
-
+@csrf_exempt 
 def peminjaman(request):
     if request.COOKIES.get('role'):
         if request.COOKIES.get('role') == 'manajer':
@@ -31,6 +31,7 @@ def peminjaman(request):
     else:
         return HttpResponseRedirect(reverse('example_app:index'))
 
+@csrf_exempt 
 def buat_peminjaman(request):
     if request.COOKIES.get('role'):
         if request.COOKIES.get('role') == 'manajer':
@@ -65,7 +66,7 @@ def buat_peminjaman(request):
                     context = {
                         'stadium': stadium,
                         'role':'manajer',
-                        'message':'ERROR, stadium pada tanggal tersebut tidak tersedia'
+                        'message': str(e).split('CONTEXT:')[0]
                     }
                     return render(request, 'buat_peminjaman.html', context)
 
@@ -87,7 +88,7 @@ def buat_peminjaman(request):
     else:
         return HttpResponseRedirect(reverse('example_app:index'))
 
-
+@csrf_exempt 
 def edit_peminjaman(request, tanggal):
     if request.COOKIES.get('role'):
         if request.COOKIES.get('role') == 'manajer':
@@ -125,7 +126,7 @@ def edit_peminjaman(request, tanggal):
                     context = {
                         'stadium': stadium,
                         'role':'manajer',
-                        'message':'ERROR, stadium pada tanggal tersebut tidak tersedia'
+                        'message': str(e).split('CONTEXT:')[0]
                     }
                     return render(request, 'edit_peminjaman.html', context)
 

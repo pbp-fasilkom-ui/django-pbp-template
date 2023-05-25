@@ -21,5 +21,10 @@ urlpatterns = [
     path('', include('example_app.urls')),
     path('rapat/',include('rapat.urls')),
     path('peminjaman/',include('peminjaman.urls')),
-    path('pengelolaan/',include('pengelolaan.urls'))
+    path('pengelolaan/',include('pengelolaan.urls')),
+    path('pembuatan_pertandingan/',include('pembuatan_pertandingan.urls')),
+    path('pertandingan/',include('pertandingan.urls')),
+    path('list_pertandingan/',include('list_pertandingan.urls')),
+    path('history_rapat/',include('history_rapat.urls')),
+    path('beli_tiket/',include('beli_tiket.urls'))
 ]

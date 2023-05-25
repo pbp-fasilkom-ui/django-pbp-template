@@ -42,7 +42,9 @@ INSTALLED_APPS = [
     'example_app',
     'rapat',
     'peminjaman',
-    'pengelolaan'
+    'pengelolaan',
+    'pembuatan_pertandingan',
+    'pertandingan',
 ]
 
 MIDDLEWARE = [
