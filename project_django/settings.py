@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'pertandingan',
     'list_pertandingan',
     'history_rapat',
+    'beli_tiket',
 ]
 
 MIDDLEWARE = [
