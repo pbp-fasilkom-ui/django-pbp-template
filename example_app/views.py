@@ -10,6 +10,7 @@ def index(request):
         return HttpResponseRedirect(reverse('example_app:dashboard'))
     return render(request, 'login_atau_register.html')
 
+@csrf_exempt 
 def showDashboard(request):
     if request.COOKIES.get('role'):
         if request.COOKIES.get('role') == 'panitia':
@@ -168,16 +169,18 @@ def login(request):
 
     return render(request, 'login.html')
 
+@csrf_exempt 
 def logout_user(request):
     response = HttpResponseRedirect(reverse('example_app:index'))
     for cookie in request.COOKIES:
         response.delete_cookie(cookie)
     return response
 
+@csrf_exempt 
 def register_select(request):
     return render(request, 'register.html')
 
-
+@csrf_exempt 
 def register_manajer(request):
     if request.method == "POST":
         username = request.POST.get('username')
@@ -238,6 +241,7 @@ def register_manajer(request):
         return render(request, 'login.html', context)
     return render(request, 'register_manajer.html')
 
+@csrf_exempt 
 def register_penonton(request):
     if request.method == "POST":
         username = request.POST.get('username')
@@ -298,6 +302,7 @@ def register_penonton(request):
         return render(request, 'login.html', context)
     return render(request, 'register_penonton.html')
 
+@csrf_exempt 
 def register_panitia(request):
     if request.method == "POST":
         username = request.POST.get('username')
