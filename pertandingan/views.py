@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 from django.urls import reverse
 from django.shortcuts import redirect
 
-
+@csrf_exempt
 def get_peristiwa(id_pertandingan, nama_tim):
     get_peristiwa_tim = f'''
                 SELECT CONCAT(nama_depan, ' ', nama_belakang), jenis     
@@ -21,7 +21,7 @@ def get_peristiwa(id_pertandingan, nama_tim):
         peristiwa_tim = [("none", "none")]
     return peristiwa_tim
 
-
+@csrf_exempt
 def get_pemain(nama_tim):
     get_pemain_tim = f'''
         SELECT ID_pemain, CONCAT(nama_depan, ' ', nama_belakang) AS nama     
@@ -34,7 +34,7 @@ def get_pemain(nama_tim):
         pemain = [("none", "none")]
     return pemain
 
-
+@csrf_exempt
 def pertandingan(request):
     if request.COOKIES.get('role'):
         if request.COOKIES.get('role') == 'panitia':
@@ -103,7 +103,7 @@ def pertandingan(request):
     else:
         return HttpResponseRedirect(reverse('example_app:index'))
 
-
+@csrf_exempt
 def mulai_pertandingan(request, id_pertandingan):
     if request.COOKIES.get('role'):
         if request.COOKIES.get('role') == 'panitia':
@@ -131,7 +131,7 @@ def mulai_pertandingan(request, id_pertandingan):
     else:
         return HttpResponseRedirect(reverse('example_app:index'))
 
-
+@csrf_exempt
 def pilih_peristiwa(request, id_pertandingan, nama_tim):
     if request.COOKIES.get('role'):
         if request.COOKIES.get('role') == 'panitia':
