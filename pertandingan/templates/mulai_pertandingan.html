@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Mulai Pertandingan</title>
+{% endblock meta %}
+
+{% block content %}
+
+<body>
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-md-12">
+				<div class="card mx-auto mt-4">
+					<div class="card-body">
+						<h5 class="card-title text-center">MULAI PERTANDINGAN</h5>
+						<table class="table " style="table-layout: fixed; width: 100%;">
+							<colgroup>
+								<col style="width: 30%;">
+								<col style="width: 30%;">
+								<col style="width: 40%;">
+							</colgroup>
+							<thead>
+								<tr>
+									<th style="text-align: center;">Tim 1</th>
+									<th style="text-align: center;">Tim 2</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td style="text-align: center;">{{tim1}}</td>
+									<td style="text-align: center;">{{tim2}}</td>
+									<td style="text-align: center;">
+										<div class="d-flex flex-column flex-shrink-0 mx-auto">
+											<!-- Button trigger modal -->
+											<div class="my-2">
+												<a href="{% url 'pertandingan:pilih_peristiwa' id_pertandingan tim1 %}" class="block btn btn-primary">
+													Masukkan Peristiwa Tim 1</a>
+											</div>
+											<div>
+												<a href="{% url 'pertandingan:pilih_peristiwa' id_pertandingan tim2 %}" class="btn btn-primary">
+													Masukkan Peristiwa Tim 2</a>
+											</div>
+										</div>
+
+									</td>
+								</tr>
+
+								<tr>
+									<td colspan="5" style="text-align: center;">
+										<a href="#" class="btn btn-outline-success">Submit</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+{% endblock content %}

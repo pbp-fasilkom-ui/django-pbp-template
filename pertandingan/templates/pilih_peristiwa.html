@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Pilih Peristiwa</title>
+{% endblock meta %}
+
+{% block content %}
+
+{% if pesan_error %}
+<script>
+    alert('{{ pesan_error }}');
+</script>
+{% endif %}
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card mx-auto mt-4">
+                <div class="card-body">
+                    <h5 class="modal-title text-center" id="tambahPeristiwaLabel">Pilih Peristiwa {{nama_tim}}</h5>
+                    <div class="mx-auto">
+                        <table class="table text-center	">
+                            <thead>
+                                <tr>
+                                    <th>Nama Pemain</th>
+                                    <th>Peristiwa</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for peristiwa in daftar_peristiwa %}
+                                <tr>
+                                    <td>{{peristiwa.0}}</td>
+                                    <td>{{peristiwa.1}}</td>
+                                </tr>
+                                {% endfor %}
+                                <form method="POST" action="" id="form-peristiwa">
+                                    {% csrf_token %}
+                                    <tr>
+                                        <td>
+                                            <div class="form-group ">
+                                                <select class="form-control text-center" name="pemain" form="form-peristiwa">
+                                                    <option value="">-- Pilih Pemain --</option>
+                                                    {% for pemain in daftar_pemain %}
+                                                    <option value={{pemain.0}}>{{pemain.1}}</option>
+                                                    {% endfor %}
+                                                    <option value="none">None</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <select class="form-control text-center"  name="jenis" form="form-peristiwa">
+                                                    <option value="">-- Pilih Peristiwa --</option>
+                                                    <option value="kartu kuning">Kartu Kuning</option>
+                                                    <option value="kartu merah">Kartu Merah</option>
+                                                    <option value="assist">Assist</option>
+                                                    <option value="gol">Gol</option>
+                                                    <option value="none">None</option>
+
+                                                </select>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </form>
+                            </tbody>
+                        </table>
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" form="form-peristiwa" class="btn btn-primary">Selesai</button>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock content %}

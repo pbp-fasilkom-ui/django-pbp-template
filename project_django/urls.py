@@ -22,4 +22,5 @@ urlpatterns = [
     path('rapat/',include('rapat.urls')),
     path('peminjaman/',include('peminjaman.urls')),
     path('pembuatan_pertandingan/',include('pembuatan_pertandingan.urls')),
+    path('pertandingan/',include('pertandingan.urls')),
 ]
