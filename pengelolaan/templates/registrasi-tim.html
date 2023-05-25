@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Form Registrasi Tim</title>
+<style>
+    h1 {
+      text-align: center;
+      padding-bottom: 10px;
+    }
+    .card {
+      width: 900px;
+    }
+    
+    #buttonSubmit {
+      margin-top: 10px;
+    }
+  </style>
+{% endblock meta %}
+
+{% block content %}
+<div class="w-75 mx-auto">
+    <div class="d-flex-ol w-50 mx-auto justify-content-end border rounded mt-3">
+        <div class="border-bottom py-2 text-center bg-success text-white rounded">
+            FORM REGISTRASI
+        </div>
+
+        <form class="p-3" action="{% url 'pengelolaan:registrasi_tim' %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="nama_tim">Nama Tim</label>
+                <input type="text" class="form-control" id="nama_tim" name="nama_tim"
+                    placeholder="Masukkan nama tim anda">
+            </div>
+            
+            <div class="form-group">
+                <label for="nama_univ">Nama Universitas</label>
+                <input type="text" class="form-control" id="nama_univ" name="nama_univ"
+                    placeholder="Masukkan nama Universitas anda">
+            </div>
+
+            <div class="d-flex justify-content-center mt-5 mx-auto">
+                <button type="submit" class="btn btn-primary w-25">Daftar</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="text-center mt-5">
+        {% if message %}
+            <a class="text-decoration-none text-danger">{{message}}</a>
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock content %}

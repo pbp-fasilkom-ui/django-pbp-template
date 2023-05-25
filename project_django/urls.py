@@ -21,4 +21,5 @@ urlpatterns = [
     path('', include('example_app.urls')),
     path('rapat/',include('rapat.urls')),
     path('peminjaman/',include('peminjaman.urls')),
+    path('pengelolaan/',include('pengelolaan.urls'))
 ]

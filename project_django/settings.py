@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'example_app',
     'rapat',
     'peminjaman',
+    'pengelolaan'
 ]
 
 MIDDLEWARE = [
@@ -87,7 +88,6 @@ DATABASES = {
         'PASSWORD' : 'voqCmidHYb879t8OF1VL',
         'HOST' : 'containers-us-west-155.railway.app',
         'PORT' : '7210',
-        
     },
 }
 

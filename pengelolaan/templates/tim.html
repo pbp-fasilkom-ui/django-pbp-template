@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Pengelolaan Tim</title>
+<style>
+    h1 {
+      text-align: center;
+      padding-bottom: 10px;
+    }
+    .card {
+      width: 900px;
+    }
+    
+    #buttonSubmit {
+      margin-top: 10px;
+    }
+  </style>
+{% endblock meta %}
+
+{% block content %}
+    
+    <div class="w-75 mx-auto my-2 ">
+        <div class="text-center mt-5">
+            {% if message %}
+                <a class="text-decoration-none text-danger">{{message}}</a>
+            {% endif %}
+        </div>
+
+        <div class="border border-dark py-2 mb-2 text-center bg-success text-white fw-bold rounded ">
+            Tim
+        </div>
+        <div class="border border-dark py-2 text-center fw-bold bg-warning bg-opacity-50 ">
+            Pemain
+        </div>
+        <table class="table border border-dark text-center">
+            <thead>
+                <tr>
+                    <th scope="col">Nama Pemain</th>
+                    <th scope="col">No HP</th>
+                    <th scope="col">Tanggal Lahir</th>
+                    <th scope="col">Is Captain</th>
+                    <th scope="col">Posisi</th>
+                    <th scope="col">NPM</th>
+                    <th scope="col">Jenjang</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pemain in daftar_pemain %}
+                <tr>
+                    <th>{{ pemain.1 }}</th>
+                    <td>{{ pemain.2 }}</td>
+                    <td>{{ pemain.3 }}</td>
+                    <td>{{ pemain.4 }}</td>
+                    <th>{{ pemain.5 }}</th>
+                    <td>{{ pemain.6 }}</td>
+                    <td>{{ pemain.7 }}</td>
+                    <td>
+                        <div class="d-flex-col">
+                            <form action="{% url 'pengelolaan:make_captain' %}" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="id_pemain" value="{{ pemain.0 }}">
+                                <button type="submit" class="btn btn-warning">Make Captain</button>
+                            </form>
+                        
+                            <form action="{% url 'pengelolaan:delete_pemain' %}" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="id_pemain" value="{{ pemain.0 }}">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="border border-dark py-2 text-center bg-warning bg-opacity-50 fw-bold ">
+            Pelatih
+        </div>
+
+        <table class="table border border-dark text-center">
+            <thead>
+                <tr>
+                    <th scope="col">Nama Pelatih</th>
+                    <th scope="col">No HP</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Alamat</th>
+                    <th scope="col">Spesialisasi</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pelatih in daftar_pelatih %}
+                <tr>
+                    <th scope="row">{{ pelatih.1 }}</th>
+                    <td>{{ pelatih.2 }}</td>
+                    <td>{{ pelatih.3 }}</td>
+                    <td>{{ pelatih.4 }}</td>
+                    <th>{{ pelatih.5 }}</th>
+                    <td>
+                        <div class="d-flex-col">
+                        <form action="{% url 'pengelolaan:delete_pelatih' %}" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="id_pelatih" value="{{ pelatih.0 }}">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                </div>
+                </td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="d-flex justify-content-center my-3 mx-auto">
+          <a class="btn btn-primary w-25" href="/pengelolaan/tambah-pemain">Tambah Pemain</a>
+        </div>
+
+        <div class="d-flex justify-content-center my-3 mx-auto">
+          <a class="btn btn-primary w-25" href="/pengelolaan/tambah-pelatih">Tambah Pelatih</a>
+        </div>
+    </div>
+{% endblock content %}
