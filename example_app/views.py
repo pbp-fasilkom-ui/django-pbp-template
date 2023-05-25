@@ -94,6 +94,7 @@ def showDashboard(request):
     else:
         return HttpResponseRedirect(reverse('example_app:index'))
 
+@csrf_exempt 
 def login(request):
     if request.COOKIES.get('role'):
         return HttpResponseRedirect(reverse('example_app:dashboard'))
