@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'example_app',
     'rapat',
     'peminjaman',
+    'pengelolaan',
     'pembuatan_pertandingan',
     'pertandingan',
 ]

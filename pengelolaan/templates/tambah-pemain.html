@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Tambah Pemain</title>
+<style>
+    h1 {
+      text-align: center;
+      padding-bottom: 10px;
+    }
+    .card {
+      width: 900px;
+    }
+    
+    #buttonSubmit {
+      margin-top: 10px;
+    }
+  </style>
+{% endblock meta %}
+
+{% block content %}
+<div>    
+    <!-- HEADER -->
+    <h1>DAFTAR PEMAIN</h1>
+
+    <!-- CARD -->
+    <div class="row justify-content-center">
+        <div class="card">
+        <div class="card-body">
+    
+            <a class="btn btn-outline-danger" href="/pengelolaan">Kembali </a>
+
+            <form method="POST" action="">
+            {% csrf_token %}
+                <h5 class="text-center">PEMAIN YANG AKAN DIDAFTARKAN : </h5>
+                <h5 class="text-center">[Nama Pemain - Posisi] </h5>
+                <br>
+                <select class="form-select" aria-label="Default select example" name="pemain">
+                    {% for line in pemain %}
+                        <option value="{{line.0}}" >{{line.1}} {{line.2}} - {{line.3}}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                 <div class="d-flex justify-content-center">
+                    <input class="btn btn-success" type="submit" value="SUBMIT"></input>
+                </div>
+            </form>
+
+        </div>
+        
+        </div>
+        <div class="text-center mt-5">
+          {% if message %}
+              <a class="text-decoration-none text-danger">{{message}}</a>
+          {% endif %}
+      </div>
+    </div>
+    </div>
+    
+    {% endblock content %}
