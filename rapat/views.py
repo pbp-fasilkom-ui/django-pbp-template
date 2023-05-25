@@ -15,7 +15,7 @@ def rapat(request):
             S.nama, P.start_datetime, P.end_datetime, 
             P.id_pertandingan FROM Pertandingan P, Tim_Pertandingan TP, stadium S 
             WHERE TP.id_pertandingan = P.id_pertandingan AND S.id_stadium = P.stadium
-            AND P.id_pertandingan 
+            AND P.id_pertandingan      
             NOT IN (SELECT rapat.id_pertandingan FROM rapat) GROUP BY P.id_pertandingan, S.nama;
             '''
             cursor.execute(query1)

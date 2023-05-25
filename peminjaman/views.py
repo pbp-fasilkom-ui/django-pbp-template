@@ -65,7 +65,7 @@ def buat_peminjaman(request):
                     context = {
                         'stadium': stadium,
                         'role':'manajer',
-                        'message':'ERROR, stadium pada tanggal tersebut tidak tersedia'
+                        'message': str(e).split('CONTEXT:')[0]
                     }
                     return render(request, 'buat_peminjaman.html', context)
 
@@ -125,7 +125,7 @@ def edit_peminjaman(request, tanggal):
                     context = {
                         'stadium': stadium,
                         'role':'manajer',
-                        'message':'ERROR, stadium pada tanggal tersebut tidak tersedia'
+                        'message': str(e).split('CONTEXT:')[0]
                     }
                     return render(request, 'edit_peminjaman.html', context)
 
