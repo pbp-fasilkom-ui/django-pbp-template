@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>History Rapat</title>
+<style>
+    h1 {
+      text-align: center;
+      padding-bottom: 10px;
+    }
+    table {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+{% endblock meta %}
+
+{% block content %}
+<div>
+<h1 >History Rapat</h1>
+<br>
+<table class="table table-striped" style="width:90%">
+    <thead>
+      <tr>
+        <th scope="col">Rapat Tim</th>
+        <th scope="col">Nama Panitia</th>
+        <th scope="col">Stadium</th>
+        <th scope="col">Tanggal dan Waktu</th>
+        <th scope="col" style="width:15%">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    {% for line in history_rapat %}
+    <tr>
+    <td>{{line.0}}</td>
+    <td>{{line.1}}</td>
+    <td>{{line.2}}</td>
+    <td>{{line.3}}</td>
+    <td><a class="btn btn-outline-success" href="/history_rapat/isi_rapat/{{line.4}}">Lihat Hasil Rapat</a></td>
+    </tr>
+    {% endfor %}
+  
+    </tbody>
+  </table>
+</div>
+{% endblock content %}
